@@ -47,7 +47,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
   }
 
   void _recordLapTime(String time) {
-    _lapTimes.insert(0, '${_lapTimes.length + 1}등 $_time');
+    _lapTimes.insert(0, '${_lapTimes.length + 1}등 $time');
   }
 
   @override
@@ -74,16 +74,16 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
             children: [
               Text(
                 '$sec',
-                style: TextStyle(fontSize: 50),
+                style: const TextStyle(fontSize: 50),
               ),
-              Text('$hundredth'),
+              Text(hundredth),
             ],
           ),
           SizedBox(
             width: 100,
             height: 200,
             child: ListView(
-              children: [],
+              children: _lapTimes.map((time) => Center(child: Text(time))).toList(),
             ),
           ),
           const Spacer(),
