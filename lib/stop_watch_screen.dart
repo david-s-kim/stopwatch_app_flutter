@@ -13,9 +13,23 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
   Timer? _timer;
 
   int _time = 0;
-  bool _isRenning = false;
+  bool _isRunning = false;
 
   List<String> _lapTimes = [];
+
+  void _clickButton() {
+    _isRunning = !_isRunning;
+
+    if (_isRunning) {
+      _start();
+    } else {
+      _pause();
+    }
+  }
+
+  void _start() {}
+
+  void _pause() {}
 
   @override
   void dispose() {
@@ -36,7 +50,10 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('0', style: TextStyle(fontSize: 50),),
+              Text(
+                '0',
+                style: TextStyle(fontSize: 50),
+              ),
               Text('00'),
             ],
           ),
@@ -44,8 +61,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
             width: 100,
             height: 200,
             child: ListView(
-              children: [
-              ],
+              children: [],
             ),
           ),
           const Spacer(),
@@ -58,8 +74,14 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                 child: const Icon(Icons.refresh),
               ),
               FloatingActionButton(
-                onPressed: () {},
-                child: const Icon(Icons.play_arrow),
+                onPressed: () {
+                  setState(() {
+                    _clickButton();
+                  });
+                },
+                child: _isRunning
+                    ? const Icon(Icons.pause)
+                    : const Icon(Icons.play_arrow),
               ),
               FloatingActionButton(
                 backgroundColor: Colors.green,
